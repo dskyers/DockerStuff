@@ -1,0 +1,14 @@
+Version: 0.0.1
+FROM dskyers/ol_images:jenkins
+RUN yum repolist
+RUN yum install java-1.7.0-openjdk-devel.x86_64 -y
+RUN yum install wget -y
+RUN wget -O /etc/yum.repos.d/hudson.repo http://hudson-ci.org/redhat/hudson.repo
+RUN yum install hudson -y 
+RUN yum install sysvinit-tools.x86_64 -y 
+RUN yum install openssh-server -y 
+RUN yum install initscripts.x86_64 -y
+RUN /etc/rc.d/init.d/sshd restart
+RUN /etc/rc.d/init.d/hudson restart
+EXPOSE 22
+EXPOSE 8080
